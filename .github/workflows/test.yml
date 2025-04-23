@@ -23,7 +23,7 @@ jobs:
         with:
           label: "My Label"
           color: "red"
-          path: "test/coverage.opencover.xml"
+          path: "test/coverage.cobertura.xml"
         
       - name: Print code coverage
         run: echo "Code coverage percentage ${{steps.test_step.outputs.percentage}}%"

@@ -11,7 +11,7 @@ try {
   const gistAuthToken = core.getInput('gist-auth-token');
 
   let testReport = readFile(path);
-  let coveragePercentage = extractSummaryFromOpencover(testReport);
+  let coveragePercentage = extractSummaryFromCobertura(testReport);
   let badgeData = createBadgeData(label, coveragePercentage, color);
   publishBadge(badgeData, gistFilename, gistId, gistAuthToken);
 
@@ -77,13 +77,12 @@ function readFile(path) {
   return fs.readFileSync(path, 'utf8');
 }
 
-function extractSummaryFromOpencover(content) {
-  let rx = /(?<=sequenceCoverage=")\d*\.*\d*(?=")/m;
+function extractSummaryFromCobertura(content) {
+  let rx = /(?<=line-rate=")\d*\.*\d*(?=")/m;
   let arr = rx.exec(content);
-
   if (arr == null) {
-    throw new Error('No code coverage percentage was found in the provided opencover report. Was looking for an xml elemet named Summary with the attribute sequenceCoverage');
+    throw new Error('No code coverage percentage was found in the provided cobertura report. Was looking for an xml elemet named Summary with the attribute sequenceCoverage');
   }
 
-  return arr[0]; 
+  return (arr[0] * 100).toFixed(2);
 }

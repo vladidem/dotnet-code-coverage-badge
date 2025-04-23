@@ -1,5 +1,5 @@
 name: '.Net Code Coverage Badge'
-description: 'Extact code coverage percentage from an opencover report and generates metadata for a shields.io badge'
+description: 'Extact code coverage percentage from an cobertura report and generates metadata for a shields.io badge'
 branding:
   icon: 'award'  
   color: 'yellow'
@@ -14,7 +14,7 @@ inputs:
     required: false
     default: 'brightgreen'
   path:
-    description: 'the path to the opencover.xml file'
+    description: 'the path to the cobertura.xml file'
     required: true
   gist-filename:
     description: 'Filename of the Gist used for storing the badge data'
